@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- WinExe: corre en segundo plano sin ventana de consola -->
+    <OutputType>WinExe</OutputType>
+    <!-- 10.0.19041: para usar la cámara (Windows.Media.Capture) -->
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- WPF solo porque se reutilizan las revisiones de Salud del Notebook (usan colores de WPF) -->
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RootNamespace>BotPC</RootNamespace>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="QuestPDF" Version="2026.9.1" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
+    <PackageReference Include="System.Management" Version="9.0.0" />
+  </ItemGroup>
+
+  <!-- Revisiones compartidas con la app Salud del Notebook -->
+  <ItemGroup>
+    <Compile Include="..\SaludNotebook\Modelos.cs" Link="Salud\Modelos.cs" />
+    <Compile Include="..\SaludNotebook\Revisiones\*.cs" Link="Salud\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>
